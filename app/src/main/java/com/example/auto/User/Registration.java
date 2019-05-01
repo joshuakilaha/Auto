@@ -122,32 +122,56 @@ public class Registration extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 //onSuccess
 
-                                User user = new User(Name,Email,Id,Phone);
+                               ///////////////////////////////////////Email Verification////////////////////////////////////////////////
 
-                                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Users");
-                                String key = myRef.push().getKey();
-
-                                myRef.child(Name).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
-                                    public void onSuccess(Void aVoid) {
-                                        //Sent to firebase successfully
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
 
-                                        progressDialog.dismiss();
-                                        Toast.makeText(Registration.this, "Registration successful", Toast.LENGTH_LONG).show();
-                                        UploadUserphoto(Name,pickedImageUri,mAuth.getCurrentUser());
+                                           // Toast.makeText(Registration.this, "Success, check email to verify", Toast.LENGTH_SHORT).show();
 
-                                        Intent i = new Intent(Registration.this, MainActivity.class);
-                                        startActivity(i);
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        // Write failed
-                                        progressDialog.dismiss();
+                                            User user = new User(Name,Email,Id,Phone);
 
-                                        Toast.makeText(Registration.this, "Failed: " + e.toString() + ". Try again!", Toast.LENGTH_LONG).show();
+                                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Users");
+                                            String key = myRef.push().getKey();
+
+                                            myRef.child(Name).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    //Sent to firebase successfully
+
+                                                    progressDialog.dismiss();
+                                                    Toast.makeText(Registration.this, "Success, check email to verify", Toast.LENGTH_LONG).show();
+                                                    UploadUserphoto(Name,pickedImageUri,mAuth.getCurrentUser());
+
+                                                    Intent i = new Intent(Registration.this, MainActivity.class);
+                                                    startActivity(i);
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    // Write failed
+                                                    progressDialog.dismiss();
+
+                                                    Toast.makeText(Registration.this, "Failed: " + e.toString() + ". Try again!", Toast.LENGTH_LONG).show();
+                                                }
+                                            });
+
+
+
+                                        }else {
+
+                                            Toast.makeText(Registration.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                                        }
+
+
+
+
                                     }
                                 });
+
 
 
 
