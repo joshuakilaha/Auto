@@ -145,7 +145,7 @@ public class Registration extends AppCompatActivity {
                                                     Toast.makeText(Registration.this, "Success, check email to verify", Toast.LENGTH_LONG).show();
                                                     UploadUserphoto(Name,pickedImageUri,mAuth.getCurrentUser());
 
-                                                    Intent i = new Intent(Registration.this, MainActivity.class);
+                                                    Intent i = new Intent(Registration.this, Login.class);
                                                     startActivity(i);
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {
@@ -209,7 +209,7 @@ public class Registration extends AppCompatActivity {
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                       Intent Main = new Intent(Registration.this, MainActivity.class);
+                                       Intent Main = new Intent(Registration.this, Login.class);
                                        startActivity(Main);
 
                                     }
