@@ -72,29 +72,34 @@ public class Login extends AppCompatActivity {
 
         if(TextUtils.isEmpty(Email) || TextUtils.isEmpty(Password)){
             Toast.makeText(this, "Fields are empty", Toast.LENGTH_SHORT).show();
+        }else {
+
         }
 
         final ProgressDialog progressDialog = ProgressDialog.show(Login.this, "Please wait...","Processing...",true);
-        mAuth.signInWithEmailAndPassword(Email,Password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    if(mAuth.getCurrentUser().isEmailVerified()){
-                        Toast.makeText(Login.this, "Success", Toast.LENGTH_SHORT).show();
-                        Intent toMainActivity = new Intent(Login.this,MainActivity.class);
-                        startActivity(toMainActivity);
-                    }else {
-                        Toast.makeText(Login.this, "Please verify your Email", Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }
-                }else {
-                    Toast.makeText(Login.this,task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                }
+        {
+            mAuth.signInWithEmailAndPassword(Email, Password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                if (mAuth.getCurrentUser().isEmailVerified()) {
+                                    Toast.makeText(Login.this, "Success", Toast.LENGTH_SHORT).show();
+                                    Intent toMainActivity = new Intent(Login.this, MainActivity.class);
+                                    startActivity(toMainActivity);
+                                } else {
+                                    Toast.makeText(Login.this, "Please verify your Email", Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                }
+                            } else {
 
-            }
-        });
+                                Toast.makeText(Login.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+                            }
+
+                        }
+                    });
+        }progressDialog.dismiss();
 
     }
 }
