@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     NavigationView mNavigationView;
 
     TextView name,email;
-    ImageView userimage;
+    ImageView Userimage;
 
 
 
@@ -57,10 +57,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         if(mToggle.onOptionsItemSelected(item)){
 
-            try{
+         //   try{
 
 
-            userimage = (ImageView) findViewById(R.id.useriamge);
+            Userimage = (ImageView) findViewById(R.id.useriamge);
             name = (TextView) findViewById(R.id.name);
             email = (TextView) findViewById(R.id.email);
 
@@ -69,11 +69,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             email.setText(currentUser.getEmail());
 
             //image using glide library
-            Glide.with(this).load(currentUser.getPhotoUrl()).into(userimage);
+            Glide.with(this).load(currentUser.getPhotoUrl()).into(Userimage);
 
-            }catch (Exception e){
+          //  }catch (Exception e){
 
-            }
+            //}
 
             return true;
         }
