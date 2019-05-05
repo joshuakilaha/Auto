@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.module.AppGlideModule;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             email.setText(currentUser.getEmail());
 
             //image using glide library
-            Glide.with(this).load(currentUser.getPhotoUrl()).into(Userimage);
+           // Glide.with(this).load(currentUser.getPhotoUrl()).into(Userimage);
 
           //  }catch (Exception e){
 
