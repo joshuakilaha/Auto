@@ -97,14 +97,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.logout:
 
+                mAuth.getInstance().signOut();
                 Intent Logout = new Intent(MainActivity.this, Login.class);
                 startActivity(Logout);
+                finish();
                 break;
 
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
 
         return false;
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else {
+            super.onBackPressed();
+        }
 
     }
 }
