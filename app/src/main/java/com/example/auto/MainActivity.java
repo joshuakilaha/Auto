@@ -1,5 +1,6 @@
 package com.example.auto;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.module.AppGlideModule;
+import com.example.auto.User.Login;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -94,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.logout:
+
+                Intent Logout = new Intent(MainActivity.this, Login.class);
+                startActivity(Logout);
                 break;
 
         }
